@@ -1,0 +1,245 @@
+#conting digits in a number(1)
+
+class Solution:
+    def evenlyDivides (self, N):
+        # code here
+        n=str(N)
+        count=0
+        for i in n:
+            if int(i)==0:
+                continue;
+            elif N%int(i)==0:
+                count=count+1
+        return count
+
+#printing the divisors of a number(2)
+from typing import List
+
+def printDivisors(n: int) -> List[int]:
+    # Write your code here
+    ans=[]
+    for i in range(1,n+1):
+        if n%i==0:
+            ans.append(i)
+    return ans
+    pass
+#checking prime number or not(3)
+class Solution:
+    def isPrime (self, N):
+        # code here
+        if N <= 1:
+            return 0  # Numbers less than or equal to 1 are not prime
+        if N <= 3:
+            return 1  # 2 and 3 are prime numbers
+        if N % 2 == 0 or N % 3 == 0:
+            return 0  # Multiples of 2 or 3 are not prime
+        
+        i = 5
+        while i * i <= N:
+            if N % i == 0 or N % (i + 2) == 0:
+                return 0
+            i += 6
+        
+        return 1
+  #armstrong number(4)
+class Solution:
+    def armstrongNumber (self, n):
+        N = str(n) 
+        num_digits = len(N)  # Count the number of digits
+
+        # Calculate the sum of each digit raised to the power of num_digits
+        arm_no = sum(int(digit) ** num_digits for digit in N)
+
+        # Check if the sum is equal to the original number
+        if arm_no == n:
+            return 'true'
+        else:
+            return 'false'
+#finding largest and smallest element in an array(5)
+class Solution:
+    def get_min_max(self, arr):
+        mn=mx=arr[0]
+        for i in range(len(arr)):
+            if arr[i]<mn:
+                mn=arr[i]
+            if arr[i]>mx:
+                mx=arr[i]
+        return mn,mx
+
+#finding third largest element in an array(6)
+class Solution:
+    def thirdLargest(self,arr):
+        arr.sort()
+        return arr[-3]
+
+#finding element in an array(7)
+class Solution:
+    #Complete the below function
+    def search(self,arr, x):
+        #Your code here
+        for i in range(len(arr)):
+            if arr[i]==x:
+                return i
+        return -1
+
+#finding missing value(8)
+
+class Solution:
+    
+    # Note that the size of the array is n-1
+    def missingNumber(self, n, arr):
+        
+        # code here
+        hash=[0]*(n+1)
+        for num in arr:
+            hash[num]=1
+        missing=-1
+        for i in range(n+1):
+            if hash[i]==0:
+                missing=i
+        return missing
+
+#dutch national flag algorithm for sorting 0s,1s,2s(9)
+
+
+class Solution:
+    def sort012(self,arr,n):
+        # code here
+        #using dutch national flag algorithm
+        low,mid,high=0,0,n-1
+        while mid<=high:
+            if arr[mid]==0:
+                arr[low],arr[mid]=arr[mid],arr[low]
+                low+=1
+                mid+=1
+            elif arr[mid]==1:
+                mid+=1
+            else:
+                arr[mid],arr[high]=arr[high],arr[mid]
+                high-=1
+
+#array subset(10)
+
+def isSubset( a1, a2, n, m):
+    freq_a1 = {}
+    freq_a2 = {}
+    
+    # Count the frequency of each element in a1
+    for element in a1:
+        if element in freq_a1:
+            freq_a1[element] += 1
+        else:
+            freq_a1[element] = 1
+    
+    # Count the frequency of each element in a2
+    for element in a2:
+        if element in freq_a2:
+            freq_a2[element] += 1
+        else:
+            freq_a2[element] = 1
+    
+    # Check if all elements in a2 have sufficient counts in a1
+    for element in freq_a2:
+        if element not in freq_a1 or freq_a2[element] > freq_a1[element]:
+            return 'No'
+    
+    return 'Yes'
+
+#count the frequency of an element in an array
+
+def frequencyCount(self, arr, n,p):
+        freq = [0] * n
+    
+    # Step 2: Count the frequencies
+        for num in arr:
+            if 1 <= num <= n:
+                freq[num - 1] += 1
+    
+    # Step 3: Update the original array with frequencies
+        for i in range(n):
+            arr[i] = freq[i]
+#two sum using twwo pointer approa	
+
+def hasArrayTwoCandidates(self,arr, x):
+		# code here
+	 arr.sort()
+    
+    # Step 2: Use two pointers to find if there exists a pair with sum equal to x
+        left = 0
+        right = len(arr) - 1
+    
+        while left < right:
+            current_sum = arr[left] + arr[right]
+            if current_sum < x:
+                left += 1
+            elif current_sum > x:
+                right -= 1
+            else:
+                return True
+    
+        return False
+# sum of three numbers******
+
+    def find3Numbers(self, arr, n, x):
+        # Your Code Here
+        ans=[]
+        arr.sort()
+        for i in range(0,n):
+            if (i>0 and arr[i]==arr[i-1]):
+                continue
+            j=i+1
+            k=n-1
+            while(j<k):
+                sum=arr[i]+arr[j]+arr[k]
+                if (sum<x):
+                    j+=1
+                elif (sum>x):
+                    k-=1
+                else:
+                    temp=[arr[i],arr[j],arr[k]]
+                    ans.append(temp)
+                    j+=1
+                    k-=1
+                    while(j<k) and arr[j]==arr[j-1]:
+                        j+=1
+                    while(j<k) and arr[k]==arr[k+1]:
+                        k-=1
+        return ans
+#combine arr and find the k th position
+
+def kthElement(self, k, arr1, arr2):
+        combinedarr=arr1+arr2
+        combinedarr.sort()
+        if k<=len(combinedarr):
+            return combinedarr[k-1]
+        else:
+            return "index out of range"
+
+#union of arr
+def doUnion(self,arr1,arr2):
+        #code here
+        unionarr=set(arr1).union (set(arr2))
+        return len(unionarr)
+
+#intersection of two arrays
+def NumberofElementsInIntersection(self,a, b, n, m):
+        #return: expected length of the intersection array.
+        intersection=set(a).intersection(set(b))
+        return len(intersection)
+
+# longest subarray in array
+
+    def lenOfLongSubarr (self, arr, n, k) : 
+        #Complete the function
+        psm={}
+        sum=0
+        maxlen=0
+        for i in range(n):
+            sum+=arr[i]
+            if sum==k:
+                maxlen=i+1
+            if (sum-k)in psm:
+                maxlen=max(maxlen,i-psm[sum-k])
+            if sum not in psm:
+                psm[sum]=i
+        return maxlen
